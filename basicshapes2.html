@@ -1,0 +1,117 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title> D3 Projects Kanu</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<script>
+		
+
+	
+	d3.json("mydata.json",function(data) {
+			
+			d3.select("body")
+			.append("p")
+			.style("color","red")
+			.text("Hi,my first visuals");
+			
+		
+		height=700;
+		width=700;
+	   dataArray = [10,40,90];
+	
+	var dataScale=d3.scale
+				.linear()
+				.domain([0,80])
+				.range([0,width-55]);
+				
+						
+	var colorbar = d3.scale
+				.linear()
+				.domain([0,80])
+				.range(["red","blue"]);
+	
+	var axis = d3.svg.axis()
+				.scale(dataScale);
+				
+				
+	var canvas=	d3.select("body")
+			.append("svg")
+			.attr("height",height)
+			.attr("width",width)
+			.append("g")
+			.attr("transform","translate(10,50)")
+			
+			
+	var circle = canvas.append("circle")
+						.attr("cx",100)
+						.attr("cy",40)
+						.attr("r",30)
+						.attr("fill","red");
+	
+	circle.transition()
+			.duration(1500)
+			.attr("cx",300)
+			.transition(2000)
+			.attr("cy",400)
+			.each("end",function(){d3.select(this).attr("fill","green")});
+
+			var rectangles=canvas.append("rect")
+						.attr("width",50)
+						.attr("height",50)
+						.attr("fill","orange");
+	
+		
+	var line = canvas.append("line")
+					.attr("x1",600)
+					.attr("y1",20)
+					.attr("x2",300)
+					.attr("y2",80)
+					.attr("stroke","purple")
+					.attr("stroke-width",5);
+	
+	line.transition()
+			.duration(1500)
+			.attr("x1",300)
+			.transition(2000)
+			.attr("y1",400)
+			.each("end",function(){d3.select(this).attr("stroke","red")});
+		
+	
+	canvas.selectAll("rect")
+		.data(data)
+		.enter()
+			.append("rect")
+			.attr("width",function(d){return (d.age)})
+			.attr("height",50)
+			.attr("y",function(d,i){return i*100})
+			.attr("fill","blue");
+			
+	canvas.selectAll("text")
+			.data(data)
+			.enter()
+			.append("text")
+			.attr("fill","white")
+			.attr("y",function(d,i){return i*100+25})	
+			.text(function(d){return d.name});
+			
+			})
+			
+			
+	
+
+	
+		</script>
+		
+		
+		
+	</body>
+	
+
+
+
+
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title> D3 Projects Kanu</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<script>
+		
+		height=700;
+		width=700;
+		
+	
+	var canvas=	d3.select("body")
+			.append("svg")
+			.attr("height",height)
+			.attr("width",width)
+			.append("g")
+			.attr("transform","translate(100,300)");
+	
+	 
+	 var tree = d3.layout.tree()
+					.size([400,400]);
+					
+					
+	d3.json("treedata.json",function(data) {
+	
+	var nodes = tree.nodes(data);
+	var links = tree.links(nodes);
+	
+	var node = canvas.selectAll(".node")
+						.data(nodes)
+						.enter()
+						.append("g")
+						.attr("class","node")
+						.attr("transform",function(d){return "translate(" + d.y + "," + d.x +  ")"})	;
+	
+	node.append("circle")
+		.attr("r",3)
+		.attr("fill","steelblue");
+		
+node.append("text")
+		.text(function(d) {return d.name;});
+		
+		
+		var diag = d3.svg.diagonal()
+						.projection(function(d){return [d.y,d.x]});
+		canvas.selectAll(".link")
+				.data(links)
+				.enter()
+				.append("path")
+				.attr("class","link")
+				.attr("fill","none")
+				.attr("stroke","red")
+				.attr("d",diag);
+	
+	
+
+		
+	})				
+					
+			
+			
+			
+	
+
+	
+		</script>
+		
+		
+		
+	</body>
+	
+
+
+
+
+</html>

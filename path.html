@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title> D3 Projects Kanu</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<script>
+		
+		height=700;
+		width=700;
+				
+	    var dataArray = [{x:10,y:30},
+					 {x:90,y:90},
+					 {x:120,y:160}];
+	
+	
+				
+	var canvas=	d3.select("body")
+			.append("svg")
+			.attr("height",height)
+			.attr("width",width);
+			
+			
+			
+			
+	var group= canvas.append("g")		
+					.attr("transform","translate(300,300)");
+	
+	var line = d3.svg.line()
+						.x(function(d) { return d.x;})
+						.y(function(d) { return d.y;});
+					
+	group.selectAll("path")
+		 .data([dataArray])
+		 .enter()
+		 .append("path")
+		 .attr("d",line)
+		 .attr("fill","none")
+		 .attr("stroke","green")
+		 .attr("stroke-width",5);	
+		  	
+			
+	
+
+	
+		</script>
+		
+		
+		
+	</body>
+	
+
+
+
+
+</html>

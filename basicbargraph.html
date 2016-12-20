@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title> D3 Projects Kanu</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<script>
+		
+		width=600;
+		height=800;
+
+		
+		var dataAr = [10,20,80];
+		var color = d3.scale
+						.linear()
+						.domain([0,80])
+						.range(["red","blue"]);
+
+		var scaleWidth = d3.scale
+						.linear()
+						.domain([0,80])
+						.range([0,width]);				
+
+
+		var canvas=	d3.select("body")
+					.append("svg")
+					.attr("width",width)
+					.attr("height",height);
+
+        var bar = canvas.selectAll("rect")
+        				.data(dataAr)
+        				.enter()
+        				.append("rect")
+        				.attr("width",function(d) {return scaleWidth(d);})
+        				.attr("height",50)
+        				.attr("y",function(d,i) {return i*100;})
+        				.attr("fill",function(d){return color(d);});
+
+
+		</script>
+		
+		
+		
+	</body>
+	
+
+
+
+
+</html>

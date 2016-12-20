@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<title> D3 Tutorial Kanu</title>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+	</head>
+
+	<body>
+		<script>
+		
+		dataArray = [10];
+		width = 650;
+		height = 600;
+		
+		var color = d3.scale.linear()
+							.domain([0,100])
+							.range(["green","yellow"]);
+		
+		var widthScale = d3.scale.linear()
+									.domain([0,100])
+									.range([0,width]);
+				
+		var axis = d3.svg.axis()
+							.scale(widthScale);
+							
+			
+		var canvas = d3.select("body")
+						.append("svg")
+						.attr("width",800)
+						.attr("height",800)
+						.append("g")
+						.attr("transform","translate(100,200)");
+						
+		var cicle1 = canvas.append("circle")
+						.attr("cx",50)
+						.attr("cy",60)
+						.attr("r",20);
+		
+		
+		
+		var circle2 = canvas.selectAll("circle")
+						.data(dataArray)
+						 .attr("fill","red")
+						.update()
+							.attr("fill","blue");
+		
+		
+		
+			
+		
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title> D3 Projects Kanu</title>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<script>
+			
+			
+var data = [ 10, 50, 80];
+var r = 137;
+var width = 600;
+var height = 600;
+
+var color = d3.scale.ordinal()
+.range(["red", "blue", "orange"]);
+
+var svg = d3.select("svg").append("svg")
+.attr("width" ,width)
+.attr("height",height);
+
+var group = svg.append("g")
+.attr("transform", "translate( 263, 218)");
+
+var arc = d3.svg.arc()
+.innerRadius(194)
+.outerRadius(r);
+
+var pie = d3.layout.pie()
+.value(function(d) {return (d)});
+
+var arcs = group.selectAll(".arc")
+.data(pie(data))
+.enter()
+.append("g")
+.attr("class", "arc");
+
+arcs.append("path")
+.attr("d", arc)
+.attr("fill", function(d) { return color(d.data)} );
+
+arcs.append("text")
+.attr("transform", function (d) {return "translate(" + arc.centroid(d) + ")"})
+.attr("text-anchor", "middle")
+.attr("font-size", "0.9792em")
+.text(function(d) { return(d.data)});
+
+
+			
+		</script>
+		
+		
+		
+	</body>
+	
+
+
+
+
+</html>
